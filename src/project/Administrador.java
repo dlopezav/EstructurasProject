@@ -5,10 +5,18 @@
  */
 package project;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Hamed
  */
 public class Administrador {
+    private ArrayList<Concierto> conciertos;
+
+    public Administrador() {
+        this.conciertos = null;
+    }
+    
     
 }
