@@ -20,6 +20,15 @@ public class Concierto {
     private ArrayList<Zona> zonas;
     private String hora;
 
+    public Concierto(Date fecha, String nombre, ArrayList<Artista> artistas, ArrayList<Persona> asistentes, ArrayList<Zona> zonas, String hora) {
+        this.fecha = fecha;
+        this.nombre = nombre;
+        this.artistas = artistas;
+        this.asistentes = asistentes;
+        this.zonas = zonas;
+        this.hora = hora;
+    }
+
     public Date getFecha() {
         return fecha;
     }

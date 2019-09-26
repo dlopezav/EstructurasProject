@@ -13,10 +13,12 @@ import java.util.Date;
  */
 public class BoletaVIP extends Boleta {
     
-   private int numSilla;
+    private int numSilla;
+    private Boolean estadoReserva;
+    private Boolean estado;
 
     public BoletaVIP(int numSilla, Date fecha, String nombreConcierto, Boolean estado) {
-        super(fecha, nombreConcierto, estado);
+        super(fecha, nombreConcierto);
         this.numSilla = numSilla;
     }
     public int getNumSilla() {
@@ -24,6 +26,22 @@ public class BoletaVIP extends Boleta {
     }
     public void setNumSilla(int numSilla) {
         this.numSilla = numSilla;
+    }
+
+    public Boolean getEstadoReserva() {
+        return estadoReserva;
+    }
+
+    public void setEstadoReserva(Boolean estadoReserva) {
+        this.estadoReserva = estadoReserva;
+    }
+
+    public Boolean getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Boolean estado) {
+        this.estado = estado;
     }
 
     

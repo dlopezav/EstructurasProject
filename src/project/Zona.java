@@ -17,11 +17,11 @@ public class Zona {
     private int precio;
     private ArrayList<Boleta> boletas;
 
-    public Zona(int cupos, int numero, int precio, ArrayList<Boleta> boletas) {
+    public Zona(int cupos, int numero, int precio) {
         this.cupos = cupos;
         this.numero = numero;
         this.precio = precio;
-        this.boletas = boletas;
+        this.boletas = new ArrayList<>();
     }
     public int getCupos() {
         return cupos;

@@ -36,8 +36,8 @@ public class Alm {
         this.personas = personas;
     }
 
-    public Boolean[] verificarPersona(String correo, String contrasena){
-        Boolean[] confirmacion = new Boolean[2];
+    public boolean[] verificarPersona(String correo, String contrasena){
+        boolean[] confirmacion = new boolean[2];
         for(int i=0; i<personas.size;i++){
             if(correo == personas.get(i).getCorreo() && personas.get(i).getContrasena() == contrasena ){
                 confirmacion[0]=true; 
@@ -46,21 +46,31 @@ public class Alm {
         }
         return confirmacion;
     }
-    public String mostrarZonas(int nombre){
+    public void mostrarZonas(int nombre){
         for(int i=0;i<conciertos.size;i++){
             if(conciertos.get(i).getNombre().equals(nombre)){
                 for(int j=0; j<conciertos.get(i).getZonas().size();j++){
-                    System.out.println("Zona "+conciertos.get(i).getZonas().get(j).getNumero() +": "+conciertos.get(i).getZonas().get(j).getCupos());
+                    System.out.println("Zona "+conciertos.get(i).getZonas().get(j).getNumero() +", cupos: "+conciertos.get(i).getZonas().get(j).getCupos()+", precio: "+conciertos.get(i).getZonas().get(j).getPrecio() );
                 }
             }
         }
-        return null;
     }
     
     public void comprar(ArrayList<Boleta> boleta){
         
     }
     
+    public boolean disponible(Zona zone, int cuposQ){
+        if(zone.getCupos() < cuposQ){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    
+    public void reservar(ArrayList<Boleta> boleta){
+        
+    }
     
     
 }

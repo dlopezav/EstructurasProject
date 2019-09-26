@@ -14,12 +14,10 @@ import java.util.Date;
 public class Boleta {
     private Date fecha;
     private String nombreConcierto;
-    private Boolean estado;
 
-    public Boleta( Date fecha, String nombreConcierto, Boolean estado) {
+    public Boleta( Date fecha, String nombreConcierto) {
         this.fecha = fecha;
         this.nombreConcierto = nombreConcierto;
-        this.estado = estado;
     }
     public Date getFecha() {
         return fecha;
@@ -37,17 +35,6 @@ public class Boleta {
         this.nombreConcierto = nombreConcierto;
     }
 
-    public Boolean getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Boolean estado) {
-        this.estado = estado;
-    }
-    
-    
-    
-    
     
     
 }
