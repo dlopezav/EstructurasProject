@@ -7,7 +7,7 @@ package project;
 
 /**
  *
- * @author Hamed
+ * @author Hamed, Diego, David
  */
 public class Artista {
     private String generoMusical;

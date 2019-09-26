@@ -9,39 +9,18 @@ import java.util.Date;
 
 /**
  *
- * @author Hamed
+ * @author Hamed, Diego, David
  */
 public class Boleta {
-    private int numSilla;
-    private int Seccion;
     private Date fecha;
     private String nombreConcierto;
     private Boolean estado;
 
-    public Boleta(int numSilla, int Seccion, Date fecha, String nombreConcierto, Boolean estado) {
-        this.numSilla = numSilla;
-        this.Seccion = Seccion;
+    public Boleta( Date fecha, String nombreConcierto, Boolean estado) {
         this.fecha = fecha;
         this.nombreConcierto = nombreConcierto;
         this.estado = estado;
     }
-
-    public int getNumSilla() {
-        return numSilla;
-    }
-
-    public void setNumSilla(int numSilla) {
-        this.numSilla = numSilla;
-    }
-
-    public int getSeccion() {
-        return Seccion;
-    }
-
-    public void setSeccion(int Seccion) {
-        this.Seccion = Seccion;
-    }
-
     public Date getFecha() {
         return fecha;
     }

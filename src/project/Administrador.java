@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Hamed
+ * @author Hamed, Diego, David
  */
 public class Administrador {
     private ArrayList<Concierto> conciertos;
