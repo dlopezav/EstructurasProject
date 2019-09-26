@@ -19,7 +19,6 @@ interface LinearList<T> {
     public int indexOf(T theElement);
     public T remove(int index);
     public void add(int index, T theElement);
-    
     public Iterator<T> iterator();
     
     

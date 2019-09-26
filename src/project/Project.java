@@ -7,7 +7,7 @@ package project;
 import java.util.*;
 /**
  *
- * @author Hamed
+ * @author Hamed, Diego, David
  */
 public class Project {
     

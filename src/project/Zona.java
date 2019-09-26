@@ -23,38 +23,34 @@ public class Zona {
         this.precio = precio;
         this.boletas = boletas;
     }
-
     public int getCupos() {
         return cupos;
     }
-
     public void setCupos(int cupos) {
         this.cupos = cupos;
     }
-
     public int getNumero() {
         return numero;
     }
-
     public void setNumero(int numero) {
         this.numero = numero;
     }
-
     public int getPrecio() {
         return precio;
     }
-
     public void setPrecio(int precio) {
         this.precio = precio;
     }
-
     public ArrayList<Boleta> getBoletas() {
         return boletas;
     }
-
     public void setBoletas(ArrayList<Boleta> boletas) {
         this.boletas = boletas;
     }
     
+    public void comprar(ArrayList<Boleta> boletas){
+        this.cupos=this.cupos-boletas.size();
+    }
+   
     
 }
