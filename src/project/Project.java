@@ -12,11 +12,38 @@ import java.util.*;
 public class Project {
     
     public static void menu_ingreso(){
+        Scanner scan = new Scanner(System.in);
         System.out.println("------BIENVENIDO AL MENU DE INGRESO-------");
+        System.out.println("Ingrese su correo: ");
+        String usuario=scan.next();
+        System.out.println("Ingrese su contraseña: ");
+        String contra=scan.next();
+        boolean[] dates = new boolean[2];
+        dates=verificarPersona(usuario, contra);
+        if(dates[0]){
+            if(dates[1]){
+                menu_admin();
+            }else{
+                menu_comprar();
+            }
+        }else{
+            System.out.println("\n ¡¡el ususario o la contraseña no coinciden!! \n");
+            menu_ingreso();
+        }
     };
-            
+    
+    public static void menu_admin(){
+        
+    }
+    
+    public static void menu_comprar(){
+        
+    }
+    
+    
     public static void menu_registro(){
         System.out.println("------BIENVENIDO AL MENU DE REGISTRO-------");
+        
     };
     
     public static void menu_inicial(){
