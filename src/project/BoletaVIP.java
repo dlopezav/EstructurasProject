@@ -17,11 +17,11 @@ public class BoletaVIP extends Boleta {
     private Boolean estadoReserva;
     private Boolean estado;
 
-    public BoletaVIP(int numSilla, Boolean estadoReserva, Boolean estado, int Zona, int nombreConcierto) {
+    public BoletaVIP(int numSilla, Boolean estadoReserva, Boolean estado, int Zona, String nombreConcierto) {
         super(Zona, nombreConcierto);
         this.numSilla = numSilla;
-        this.estadoReserva = estadoReserva;
-        this.estado = estado;
+        this.estadoReserva = true;
+        this.estado = true;
     }
 
     

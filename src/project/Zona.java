@@ -16,14 +16,26 @@ public class Zona {
     private int numero;
     private int precio;
     private String NombreConcierto;
+    private boolean VIP;
     private ArrayList<Boleta> boletas;
 
-    public Zona(int cupos, int numero, int precio, String nombre) {
+    public Zona(int cupos, int numero, int precio, String nombre, boolean VIP) {
         this.cupos = cupos;
         this.numero = numero;
         this.precio = precio;
         this.NombreConcierto = nombre;
         this.boletas = new ArrayList<>();
+        this.VIP = VIP;
+        if(!VIP){
+            for(int i=0; i<cupos; i++){
+               boletas.add(new Boleta(numero, nombre));
+            }
+        }else{
+            for(int i=0; i<cupos; i++){
+               boletas.add(new BoletaVIP(i, true, true, numero, nombre));
+            }
+        }
+        
     }
     public int getCupos() {
         return cupos;

@@ -13,9 +13,9 @@ import java.util.Date;
  */
 public class Boleta {
     private int Zona;
-    private int nombreConcierto;
+    private String nombreConcierto;
 
-    public Boleta(int Zona, int nombreConcierto) {
+    public Boleta(int Zona, String nombreConcierto) {
         this.Zona = Zona;
         this.nombreConcierto = nombreConcierto;
     }
@@ -28,11 +28,11 @@ public class Boleta {
         this.Zona = Zona;
     }
 
-    public int getNombreConcierto() {
+    public String getNombreConcierto() {
         return nombreConcierto;
     }
 
-    public void setNombreConcierto(int nombreConcierto) {
+    public void setNombreConcierto(String nombreConcierto) {
         this.nombreConcierto = nombreConcierto;
     }
 
