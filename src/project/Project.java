@@ -16,7 +16,7 @@ public class Project {
     static Persona Admin;
     
     static{
-        Admin =  new Persona("Admin", "admin@admin.com", 10254621, 32145655, "20/05/1990", "M", "Famisanar", true);
+        Admin =  new Persona("Admin", "admin@admin.com", "1234", 10254621, 32145655, "20/05/1990", "M", "Famisanar", true);
     }
     
     public static void menu_ingreso(){
@@ -41,8 +41,78 @@ public class Project {
     };
     
     public static void menu_admin(){
-        
+        Scanner scan = new Scanner(System.in);
+        boolean ban = true;
+        do{
+            System.out.println("-------BIENVENIDO AL MENU DE ADMINISTRADOR-------");
+            System.out.println("1. Crear concierto");
+            System.out.println("2. Crear Artista");
+            System.out.println("3. Modificar precios");
+            System.out.println("4. Elminar concierto");
+            System.out.println("5. Eliminar artistas");
+            System.out.println("6. Salir");
+           
+             System.out.println("\n Seleccione su opción: ");
+            int opc = scan.nextInt();
+            switch(opc){
+                case 1:
+                    crear_concierto();
+                    break;
+                    
+                case 2:
+                    crear_artista();
+                    break;
+                    
+                case 3:
+                    modificar_precios();
+                    break;
+                    
+                case 4:
+                    eliminar_concierto();
+                    break;
+                    
+                case 5:
+                    eliminar_artista();
+                    break;
+                    
+                case 6:
+                    menu_inicial();
+                    ban= false;
+                    break;
+
+                default:
+                        System.out.println("Opcion invalida!");
+                    break;
+            }
+        }while(ban);
     }
+    
+    public static void crear_concierto(){
+        Scanner scan = new Scanner(System.in);
+        String fecha;
+        String nombre;
+        ArrayList<Artista> artistas;
+        ArrayList<Zona> zonas;
+        String hora;
+        System.out.println("Ingrese el nombre del concierto");
+    };
+    
+    public static void crear_artista(){
+        
+    };
+    
+    public static void modificar_precios(){
+        
+    };
+    
+    public static void eliminar_concierto(){
+        
+    };
+    
+    public static void eliminar_artista(){
+        
+    };
+
     /* NO TEMINADO!!! */
     public static void menu_comprar(){
         Scanner scan = new Scanner(System.in);
@@ -55,7 +125,7 @@ public class Project {
         int bandera=0;
         boolean corte = true;
         
-        for(int i = 0; i<alma.getConciertos().size && corte; i++){
+        for(int i = 0; i<alma.getConciertos().size() && corte; i++){
             if(alma.getConciertos().get(i).getNombre().equals(opcCon)){
                 bandera = i;
                 corte = false;
@@ -118,8 +188,11 @@ public class Project {
         System.out.println("Ingrese el nombre de su EPS o sisben: ");
         String EPS = scan.next();
         
-        Persona per = new Persona(NombreCompleto, correo, cedula, celular, fechaNacimiento, genero, EPS, false);
+        Persona per = new Persona(NombreCompleto, correo, contrasena, cedula, celular, fechaNacimiento, genero, EPS, false);
         
+        alma.getPersonas().add(alma.getPersonas().size()-1,per);
+        
+        menu_inicial();
     };
     
     public static void menu_inicial(){
@@ -144,6 +217,11 @@ public class Project {
                 System.out.println("\n \n");
                 System.out.println("GRACIAS POR SU VISITA!");
             break; 
+            
+            default:
+                System.out.println("\n Opción invalida!!\n");
+                menu_inicial();
+                break;
         }
     }
     

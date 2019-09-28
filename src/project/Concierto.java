@@ -13,14 +13,14 @@ import java.util.Date;
  * @author Hamed, Diego, David
  */
 public class Concierto {
-    private Date fecha;
+    private String fecha;
     private String nombre;
     private ArrayList<Artista> artistas;
     private ArrayList<Persona> asistentes;
     private ArrayList<Zona> zonas;
     private String hora;
 
-    public Concierto(Date fecha, String nombre, ArrayList<Artista> artistas, ArrayList<Persona> asistentes, ArrayList<Zona> zonas, String hora) {
+    public Concierto(String fecha, String nombre, ArrayList<Artista> artistas, ArrayList<Persona> asistentes, ArrayList<Zona> zonas, String hora) {
         this.fecha = fecha;
         this.nombre = nombre;
         this.artistas = artistas;
@@ -29,12 +29,14 @@ public class Concierto {
         this.hora = hora;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
-    public void setFecha(Date fecha) {
+
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+    
     public String getNombre() {
         return nombre;
     }

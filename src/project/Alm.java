@@ -73,7 +73,7 @@ public class Alm {
     }
     
     public void mostrar_Conciertos(){
-        for(int i = 0; i<conciertos.size; i++){
+        for(int i = 0; i<conciertos.size(); i++){
             System.out.println(i+". "+conciertos.get(i).getNombre());
         }
     }

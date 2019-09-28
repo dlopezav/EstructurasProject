@@ -24,17 +24,19 @@ public class Persona {
     private String EPS;
     private Boolean rol;
 
-    public Persona(String NombreCompleto, String correo, int cedula, int celular, String fechaNacimiento, String genero, String EPS, Boolean rol) {
+    public Persona(String NombreCompleto, String correo, String contrasena, int cedula, int celular, String fechaNacimiento, String genero, String EPS, Boolean rol) {
         this.NombreCompleto = NombreCompleto;
         this.correo = correo;
+        this.contrasena = contrasena;
         this.cedula = cedula;
         this.celular = celular;
+        this.boleta = new ArrayList();
         this.fechaNacimiento = fechaNacimiento;
         this.genero = genero;
         this.EPS = EPS;
-        this.boleta = new ArrayList<>();
         this.rol = rol;
-    };
+    }
+    
 
     public Boolean getRol() {
         return rol;
