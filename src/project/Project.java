@@ -14,9 +14,13 @@ import java.util.*;
 public class Project {
     static Alm alma;
     static Persona Admin;
+    static Chain<Concierto> conciertos = new Chain<>();
+    static Chain<Persona> personas = new Chain<>();
     
     static{
+        alma = new Alm(conciertos, personas);
         Admin =  new Persona("Admin", "admin@admin.com", "1234", 10254621, 32145655, "20/05/1990", "M", "Famisanar", true);
+        alma.getPersonas().add(0, Admin);
     }
     
     public static void menu_ingreso(){
@@ -35,6 +39,7 @@ public class Project {
                 menu_comprar();
             }
         }else{
+            
             System.out.println("\n ¡¡el ususario o la contrasena no coinciden!! \n");
             menu_ingreso();
         }
