@@ -41,8 +41,8 @@ public class Alm {
         for(int i=0; i<personas.size;i++){
             if((personas.get(i).getCorreo().equals(correo)) && (personas.get(i).getContrasena().equals(contrasena))){
                 confirmacion[0]=true; 
+                confirmacion[1]=personas.get(i).getRol();
             }
-            confirmacion[1]=personas.get(i).getRol();
         }
         return confirmacion;
     }
