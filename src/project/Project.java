@@ -94,12 +94,18 @@ public class Project {
     
     public static void crear_concierto(){
         Scanner scan = new Scanner(System.in);
-        String fecha;
-        String nombre;
-        ArrayList<Artista> artistas;
+        ArrayList<Artista> artistas = new ArrayList();
         ArrayList<Zona> zonas;
         String hora;
-        System.out.println("Ingrese el nombre del concierto");
+        System.out.println("Ingrese el nombre del concierto: ");
+        String nombre = scan.nextLine();
+        System.out.println("Ingrese la fehca del concierto formato DD/MM/AAAA: ");
+        String fecha = scan.nextLine();
+        System.out.println("Ingrese cuantas zonas van haber: ");
+        int numZon = scan.nextInt();
+        for (int i = 0; i < numZon; i++) {
+            
+        }
     };
     
     public static void crear_artista(){
