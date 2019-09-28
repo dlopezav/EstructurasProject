@@ -53,7 +53,7 @@ public class Project {
             System.out.println("1. Crear concierto");
             System.out.println("2. Crear Artista");
             System.out.println("3. Modificar precios");
-            System.out.println("4. Elminar concierto");
+            System.out.println("4. Eliminar concierto");
             System.out.println("5. Eliminar artistas");
             System.out.println("6. Salir");
            
@@ -135,8 +135,12 @@ public class Project {
         
     };
     
-    public static void eliminar_concierto(){
-        
+    public static void eliminar_concierto(String nombre){
+        for(int i=0;i<conciertos.size;i++){
+            if(conciertos.get(i).getNombre().equals(nombre)){
+                conciertos.remove(i);
+            }
+        }
     };
     
     public static void eliminar_artista(){
