@@ -201,7 +201,10 @@ public class Project implements Serializable{
         Scanner scan = new Scanner(System.in);
         System.out.println("------BIENVENIDO AL MENU DE COMPRAR-------");
         
-        alma.mostrar_Conciertos();
+        for(int i = 0; i<conciertos.size(); i++){
+            System.out.println(i+". "+alma.getConciertos().get(i).getNombre());
+        }
+        
         System.out.println("Escriba el nombre del concierto: ");
         
         String opcCon = scan.nextLine();
