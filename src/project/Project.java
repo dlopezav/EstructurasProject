@@ -9,8 +9,10 @@ package project;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.util.*;
 import java.util.logging.Level;
@@ -168,7 +170,7 @@ public class Project {
         
         System.out.println("Ingrese cuantas artistas va a tener el concierto: ");
         int numArt = scan.nextInt();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < numArt; i++) {
             artistas.add(crear_artista());
         }
         con = new Concierto(fecha, nombre, artistas, null, zonas, hora);
@@ -332,7 +334,7 @@ public class Project {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
         /*Random rdn = new Random();
         int[] h= new int[6];
@@ -346,7 +348,15 @@ public class Project {
         */
         
         menu_inicial();
+        Guardar(alma.getPersonas(),alma.getConciertos());
       
     }
-    
+    private static void Guardar(Chain<Persona> per,Chain<Concierto> conc) throws IOException {
+        ObjectOutputStream escribir= new ObjectOutputStream(new FileOutputStream(new File("Memoria/conciertos.txt")));
+            escribir.writeObject(per);
+            escribir.close();
+        ObjectOutputStream escribir2= new ObjectOutputStream(new FileOutputStream(new File("Memoria/personas.txt")));
+            escribir2.writeObject(conc);
+            escribir2.close();
+    }
 }
