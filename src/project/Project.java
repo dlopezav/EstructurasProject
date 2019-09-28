@@ -51,11 +51,9 @@ public class Project {
         do{
             System.out.println("-------BIENVENIDO AL MENU DE ADMINISTRADOR-------");
             System.out.println("1. Crear concierto");
-            System.out.println("2. Crear Artista");
-            System.out.println("3. Modificar precios");
-            System.out.println("4. Elminar concierto");
-            System.out.println("5. Eliminar artistas");
-            System.out.println("6. Salir");
+            System.out.println("2. Modificar precios");
+            System.out.println("3. Elminar concierto");
+            System.out.println("4. Salir");
            
              System.out.println("\n Seleccione su opción: ");
             int opc = scan.nextInt();
@@ -65,22 +63,14 @@ public class Project {
                     break;
                     
                 case 2:
-                    crear_artista();
-                    break;
-                    
-                case 3:
                     modificar_precios();
                     break;
                     
-                case 4:
+                case 3:
                     eliminar_concierto();
                     break;
-                    
-                case 5:
-                    eliminar_artista();
-                    break;
-                    
-                case 6:
+
+                case 4:
                     menu_inicial();
                     ban= false;
                     break;
@@ -94,21 +84,60 @@ public class Project {
     
     public static void crear_concierto(){
         Scanner scan = new Scanner(System.in);
+        Concierto con;
         ArrayList<Artista> artistas = new ArrayList();
-        ArrayList<Zona> zonas;
-        String hora;
+        ArrayList<Zona> zonas = new ArrayList();
         System.out.println("Ingrese el nombre del concierto: ");
         String nombre = scan.nextLine();
-        System.out.println("Ingrese la fehca del concierto formato DD/MM/AAAA: ");
+        System.out.println("Ingrese la fecha del concierto formato DD/MM/AAAA: ");
         String fecha = scan.nextLine();
-        System.out.println("Ingrese cuantas zonas van haber: ");
+        System.out.println("Ingrese la hora del concierto: ");
+        String hora = scan.nextLine();
+        System.out.println("Ingrese cuantas zonas va a tener el concierto: ");
         int numZon = scan.nextInt();
+        int[] cod = new int[numZon];
         for (int i = 0; i < numZon; i++) {
-            
+            cod[i]=100+i;
         }
+        Zona auxZona;
+        int cupos;
+        int numero;
+        int precio;
+        boolean VIP;
+        ArrayList<Boleta> boletas;
+        Boleta bol;
+        for (int i = 0; i < numZon; i++) {
+            boletas = new ArrayList();
+            System.out.println("Ingrese el numero de cupos por esta zona( " + cod[i] +" )");
+            cupos = scan.nextInt();
+            System.out.println("Ingrese el precio para la zona: ( " + cod[i] +" )");
+            precio = scan.nextInt();
+            System.out.println("Esta zona ( " + cod[i] +" ) sera VIP? (si/no)");
+            scan.next();
+            String res = scan.next();
+            if(res.equals("si")){
+                VIP=true;
+            }else{
+                VIP=false;
+            }
+            for (int j = 0; j < cupos; j++) {
+                bol = new Boleta(cod[i], nombre);
+                boletas.add(bol);
+            }
+            auxZona = new Zona(cupos, cod[i], precio, nombre, VIP);
+            zonas.add(auxZona);
+        }
+        
+        System.out.println("Ingrese cuantas artistas va a tener el concierto: ");
+        int numArt = scan.nextInt();
+        for (int i = 0; i < 10; i++) {
+            artistas.add(crear_artista());
+        }
+        con = new Concierto(fecha, nombre, artistas, null, zonas, hora);
+        menu_admin();
     };
     
-    public static void crear_artista(){
+    public static Artista crear_artista(){
         Scanner scan = new Scanner(System.in);
         String genero;
         String nombre;
@@ -121,6 +150,7 @@ public class Project {
         cantidad = scan.nextInt();
         Artista art = new Artista(genero, nombre,cantidad);
         
+        return art;
     };
     
     public static void modificar_precios(){
@@ -128,10 +158,6 @@ public class Project {
     };
     
     public static void eliminar_concierto(){
-        
-    };
-    
-    public static void eliminar_artista(){
         
     };
 
