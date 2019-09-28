@@ -55,7 +55,7 @@ public class Project implements Serializable{
         }else{
             
             System.out.println("\n ¡¡el ususario o la contrasena no coinciden!! \n");
-            menu_ingreso();
+            menu_inicial();
         }
     };
     
