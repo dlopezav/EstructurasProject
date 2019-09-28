@@ -5,13 +5,14 @@
  */
 package project;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Hamed
  */
-public class Zona {
+public class Zona implements Serializable{
     private int cupos;
     private int numero;
     private int precio;

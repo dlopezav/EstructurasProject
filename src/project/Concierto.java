@@ -5,6 +5,7 @@
  */
 package project;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
  *
  * @author Hamed, Diego, David
  */
-public class Concierto {
+public class Concierto implements Serializable{
     private String fecha;
     private String nombre;
     private ArrayList<Artista> artistas;

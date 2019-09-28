@@ -5,13 +5,14 @@
  */
 package project;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author Hp
  */
-public class BoletaVIP extends Boleta {
+public class BoletaVIP extends Boleta implements Serializable{
     
     private int numSilla;
     private Boolean estadoReserva;

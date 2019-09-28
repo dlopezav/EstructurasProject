@@ -5,6 +5,7 @@
  */
 package project;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,7 +13,7 @@ import java.util.Date;
  *
  * @author Hamed, Diego, David
  */
-public class Persona {
+public class Persona implements Serializable{
     private String NombreCompleto;
     private String correo;
     private String contrasena; 

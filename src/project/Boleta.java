@@ -5,13 +5,14 @@
  */
 package project;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author Hamed, Diego, David
  */
-public class Boleta {
+public class Boleta implements Serializable{
     private int Zona;
     private String nombreConcierto;
 

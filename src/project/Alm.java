@@ -5,13 +5,14 @@
  */
 package project;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author Hp
  */
-public class Alm {
+public class Alm implements Serializable{
     private Chain<Concierto> conciertos = new Chain<>();
     private Chain<Persona> personas = new Chain<>();
 

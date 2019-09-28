@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package project;
+import java.io.Serializable;
 import java.util.*;
 import java.util.function.Consumer;
 
@@ -11,7 +12,7 @@ import java.util.function.Consumer;
  *
  * @author Estudiante
  */
-public class Chain<T> implements LinearList<T>, Iterable<T> {
+public class Chain<T> implements LinearList<T>, Iterable<T>, Serializable {
     
     protected Node<T> firstNode;
     protected int size;

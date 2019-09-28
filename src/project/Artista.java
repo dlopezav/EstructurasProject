@@ -5,11 +5,13 @@
  */
 package project;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Hamed, Diego, David
  */
-public class Artista {
+public class Artista implements Serializable{
     private String generoMusical;
     private String nombre;
     private int integrantes;

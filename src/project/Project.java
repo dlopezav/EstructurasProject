@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintStream;
+import java.io.Serializable;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +22,7 @@ import java.util.logging.Logger;
  *
  * @author Hamed, Diego, David
  */
-public class Project {
+public class Project implements Serializable{
     static Alm alma;
     static Persona Admin;
     static Chain<Concierto> conciertos = new Chain<>();
@@ -31,32 +32,7 @@ public class Project {
         alma = new Alm(conciertos, personas);
         Admin =  new Persona("Admin", "admin@admin.com", "1234", 10254621, 32145655, "20/05/1990", "M", "Famisanar", true);
         
-        File conci= new File("Memoria/conciertos.txt");
-        File perso = new File("Memoria/personas.txt");
-        try {
-            PrintStream out= new PrintStream(conci);
-            PrintStream put= new PrintStream(perso);
-        } catch (FileNotFoundException ex) {
-        }
-        if(conci.exists()&&perso.exists()){
-            ObjectInputStream recibir;
-            ObjectInputStream recibir2;
-            try {
-                recibir = new ObjectInputStream(new FileInputStream(new File("Memoria/conciertos.txt")));
-                alma.setConciertos((Chain<Concierto>) recibir.readObject());
-                recibir.close();
-                recibir2 = new ObjectInputStream(new FileInputStream(new File("Memoria/personas.txt")));
-                alma.setPersonas((Chain<Persona>) recibir.readObject());
-                recibir2.close();
-            } catch (FileNotFoundException ex) {
-                
-            } catch (IOException ex) {
-                
-            } catch (ClassNotFoundException ex) {
-                
-            }
-            
-        }
+        
         
         alma.getPersonas().add(0, Admin);
     }
@@ -174,6 +150,7 @@ public class Project {
             artistas.add(crear_artista());
         }
         con = new Concierto(fecha, nombre, artistas, null, zonas, hora);
+        alma.getConciertos().add(0, con);
         menu_admin();
     };
     
@@ -334,7 +311,7 @@ public class Project {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         
         /*Random rdn = new Random();
         int[] h= new int[6];
@@ -346,6 +323,18 @@ public class Project {
         }
         System.out.println("fin");
         */
+        File conci= new File("Memoria/conciertos.txt");
+        File perso = new File("Memoria/personas.txt");
+        
+        if(conci.exists()&&perso.exists()){
+            ObjectInputStream recibir = new ObjectInputStream(new FileInputStream(new File("Memoria/conciertos.txt")));
+            ObjectInputStream recibir2 = new ObjectInputStream(new FileInputStream(new File("Memoria/personas.txt")));
+            alma.setConciertos((Chain<Concierto>) recibir.readObject());
+            alma.setPersonas((Chain<Persona>) recibir2.readObject());
+            recibir2.close();
+            recibir.close();
+            System.out.println(alma.getConciertos().firstNode.element.getNombre());
+        }
         
         menu_inicial();
         Guardar(alma.getPersonas(),alma.getConciertos());
@@ -353,10 +342,10 @@ public class Project {
     }
     private static void Guardar(Chain<Persona> per,Chain<Concierto> conc) throws IOException {
         ObjectOutputStream escribir= new ObjectOutputStream(new FileOutputStream(new File("Memoria/conciertos.txt")));
-            escribir.writeObject(per);
+            escribir.writeObject(conc);
             escribir.close();
         ObjectOutputStream escribir2= new ObjectOutputStream(new FileOutputStream(new File("Memoria/personas.txt")));
-            escribir2.writeObject(conc);
+            escribir2.writeObject(per);
             escribir2.close();
     }
 }
