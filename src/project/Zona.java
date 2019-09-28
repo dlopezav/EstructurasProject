@@ -54,6 +54,7 @@ public class Zona {
     }
     public void setPrecio(int precio) {
         this.precio = precio;
+        
     }
     public ArrayList<Boleta> getBoletas() {
         return boletas;

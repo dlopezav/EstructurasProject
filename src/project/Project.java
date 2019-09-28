@@ -67,7 +67,9 @@ public class Project {
                     break;
                     
                 case 3:
-                    eliminar_concierto();
+                    System.out.println("Ingrese el concierto a eliminar: ");
+                    String conElm = scan.nextLine();
+                    eliminar_concierto(conElm);
                     break;
 
                 case 4:
@@ -154,11 +156,29 @@ public class Project {
     };
     
     public static void modificar_precios(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("------BIENVENIDO AL MENU DE MODIFICAR PRECIOS-------");
+        
+        alma.mostrar_Conciertos();
+        System.out.println("Escriba el nombre del concierto: ");
+        
+        String opcCon = scan.nextLine();
+        System.out.println("Escriba el porcentaje de cambio en los precios del concierto: ");
+        int prc = scan.nextInt();
+        for(int i = 0; i<alma.getConciertos().size(); i++){
+            if(alma.getConciertos().get(i).getNombre().equals(opcCon)){
+                alma.getConciertos().get(i).cambiarPrecio(prc);
+            }
+        }
         
     };
-    
-    public static void eliminar_concierto(){
-        
+
+    public static void eliminar_concierto(String nombre){
+        for(int i=0;i<conciertos.size;i++){
+            if(conciertos.get(i).getNombre().equals(nombre)){
+                conciertos.remove(i);
+            }
+        }
     };
 
     /* NO TEMINADO!!! */
