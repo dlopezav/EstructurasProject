@@ -67,5 +67,16 @@ public class Concierto {
     public void setHora(String hora) {
         this.hora = hora;
     }
-    
+    public void cambiarPrecio(int prc){
+        prc = prc/10;
+        if(prc>0){
+        for(Zona e: this.zonas){
+            e.setPrecio(e.getPrecio()+(prc*(e.getPrecio())));
+        }
+        }else{
+            for(Zona e: this.zonas){
+            e.setPrecio(e.getPrecio()-(prc*(e.getPrecio())));
+        }
+        }
+    }
 }
