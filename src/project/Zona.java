@@ -15,12 +15,14 @@ public class Zona {
     private int cupos;
     private int numero;
     private int precio;
+    private String NombreConcierto;
     private ArrayList<Boleta> boletas;
 
-    public Zona(int cupos, int numero, int precio) {
+    public Zona(int cupos, int numero, int precio, String nombre) {
         this.cupos = cupos;
         this.numero = numero;
         this.precio = precio;
+        this.NombreConcierto = nombre;
         this.boletas = new ArrayList<>();
     }
     public int getCupos() {

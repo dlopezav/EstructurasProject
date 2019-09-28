@@ -12,28 +12,31 @@ import java.util.Date;
  * @author Hamed, Diego, David
  */
 public class Boleta {
-    private Date fecha;
-    private String nombreConcierto;
+    private int Zona;
+    private int nombreConcierto;
 
-    public Boleta( Date fecha, String nombreConcierto) {
-        this.fecha = fecha;
+    public Boleta(int Zona, int nombreConcierto) {
+        this.Zona = Zona;
         this.nombreConcierto = nombreConcierto;
     }
-    public Date getFecha() {
-        return fecha;
+
+    public int getZona() {
+        return Zona;
     }
 
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
+    public void setZona(int Zona) {
+        this.Zona = Zona;
     }
 
-    public String getNombreConcierto() {
+    public int getNombreConcierto() {
         return nombreConcierto;
     }
 
-    public void setNombreConcierto(String nombreConcierto) {
+    public void setNombreConcierto(int nombreConcierto) {
         this.nombreConcierto = nombreConcierto;
     }
+
+    
 
     
     
