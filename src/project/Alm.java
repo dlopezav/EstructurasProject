@@ -46,7 +46,7 @@ public class Alm {
         }
         return confirmacion;
     }
-    public void mostrarZonas(int nombre){
+    public void mostrarZonas(String nombre){
         for(int i=0;i<conciertos.size;i++){
             if(conciertos.get(i).getNombre().equals(nombre)){
                 for(int j=0; j<conciertos.get(i).getZonas().size();j++){
@@ -72,5 +72,9 @@ public class Alm {
         
     }
     
-    
+    public void mostrar_Conciertos(){
+        for(int i = 0; i<conciertos.size; i++){
+            System.out.println(i+". "+conciertos.get(i).getNombre());
+        }
+    }
 }

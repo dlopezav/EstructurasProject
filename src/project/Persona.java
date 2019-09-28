@@ -19,12 +19,12 @@ public class Persona {
     private int cedula;   
     private int celular;
     private ArrayList<Boleta> boleta;        
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
     private String genero;
     private String EPS;
     private Boolean rol;
 
-    public Persona(String NombreCompleto, String correo, int cedula, int celular, Date fechaNacimiento, String genero, String EPS, Boolean rol) {
+    public Persona(String NombreCompleto, String correo, int cedula, int celular, String fechaNacimiento, String genero, String EPS, Boolean rol) {
         this.NombreCompleto = NombreCompleto;
         this.correo = correo;
         this.cedula = cedula;
@@ -81,12 +81,15 @@ public class Persona {
     public void setBoleta(ArrayList<Boleta> boleta) {
         this.boleta = boleta;
     }
-    public Date getFechaNacimiento() {
+
+    public String getFechaNacimiento() {
         return fechaNacimiento;
     }
-    public void setFechaNacimiento(Date fechaNacimiento) {
+
+    public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
     public String getGenero() {
         return genero;
     }

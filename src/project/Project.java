@@ -1,3 +1,5 @@
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,16 +12,22 @@ import java.util.*;
  * @author Hamed, Diego, David
  */
 public class Project {
+    static Alm alma;
+    static Persona Admin;
+    
+    static{
+        Admin =  new Persona("Admin", "admin@admin.com", 10254621, 32145655, "20/05/1990", "M", "Famisanar", true);
+    }
     
     public static void menu_ingreso(){
         Scanner scan = new Scanner(System.in);
         System.out.println("------BIENVENIDO AL MENU DE INGRESO-------");
         System.out.println("Ingrese su correo: ");
         String usuario=scan.next();
-        System.out.println("Ingrese su contraseña: ");
+        System.out.println("Ingrese su contrasena: ");
         String contra=scan.next();
         boolean[] dates = new boolean[2];
-        dates=verificarPersona(usuario, contra);
+        dates = alma.verificarPersona(usuario, contra);
         if(dates[0]){
             if(dates[1]){
                 menu_admin();
@@ -27,7 +35,7 @@ public class Project {
                 menu_comprar();
             }
         }else{
-            System.out.println("\n ¡¡el ususario o la contraseña no coinciden!! \n");
+            System.out.println("\n ¡¡el ususario o la contrasena no coinciden!! \n");
             menu_ingreso();
         }
     };
@@ -35,14 +43,82 @@ public class Project {
     public static void menu_admin(){
         
     }
-    
+    /* NO TEMINADO!!! */
     public static void menu_comprar(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("------BIENVENIDO AL MENU DE COMPRAR-------");
         
+        alma.mostrar_Conciertos();
+        System.out.println("Escriba el nombre del concierto: ");
+        
+        String opcCon = scan.nextLine();
+        int bandera=0;
+        boolean corte = true;
+        
+        for(int i = 0; i<alma.getConciertos().size && corte; i++){
+            if(alma.getConciertos().get(i).getNombre().equals(opcCon)){
+                bandera = i;
+                corte = false;
+            }
+        }
+        if(corte){
+            System.out.println("El concierto seleccionado no existe!");
+            menu_comprar();
+        }else{
+            alma.mostrarZonas(alma.getConciertos().get(bandera).getNombre());
+        }
+        int opcZon = 0;
+        int numeroDeBoletas;
+        boolean corte2=true;
+        do{
+            System.out.println("Seleccione la zona: ");
+            opcZon = scan.nextInt();
+        
+            if(opcZon== alma.getConciertos().get(bandera).getZonas().get(opcZon).getNumero()){
+                do{
+                    System.out.println("Ingrese el numero de Boletas que desea comprar:");
+                    numeroDeBoletas = scan.nextInt();
+                    if(numeroDeBoletas<=alma.getConciertos().get(bandera).getZonas().get(opcZon).getCupos()){
+                       corte2=false; 
+                    }else{
+                        System.out.println("No hay suficientes boletas, seleccione un numero menor de boletas");
+                    }
+                }while(corte2);
+            }else{
+                System.out.println("Opción invalida! \n");
+            }
+        }while(opcZon != alma.getConciertos().get(bandera).getZonas().get(opcZon).getNumero());
     }
     
     
     public static void menu_registro(){
+        Scanner scan = new Scanner(System.in);
+
         System.out.println("------BIENVENIDO AL MENU DE REGISTRO-------");
+        System.out.println("Ingrese su Nombre Completo: ");
+        String NombreCompleto = scan.next();
+        System.out.println("Ingrese su Correo: ");
+        String correo = scan.next();
+        System.out.println("Ingrese su Contrasena: ");
+        String contrasena = scan.next();
+        System.out.println("Ingrese su Cedula: ");
+        int cedula = scan.nextInt();
+        System.out.println("Ingrese su Celular: ");
+        int celular = scan.nextInt();
+        System.out.println("Ingrese su fecha de nacimiento: ");
+        System.out.println("Ingrese el dia: ");
+        String dia = scan.next();
+        System.out.println("Ingrese el mes: ");
+        String mes = scan.next();
+        System.out.println("Ingrese el annio: ");
+        String annio = scan.next();
+        String fechaNacimiento = (dia + "/" + mes + "/" + annio);
+        System.out.println("Ingrese su genero (F/M/O): ");
+        String genero = scan.next();
+        System.out.println("Ingrese el nombre de su EPS o sisben: ");
+        String EPS = scan.next();
+        
+        Persona per = new Persona(NombreCompleto, correo, cedula, celular, fechaNacimiento, genero, EPS, false);
         
     };
     
