@@ -6,7 +6,15 @@
  * and open the template in the editor.
  */
 package project;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.PrintStream;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Hamed, Diego, David
@@ -20,6 +28,34 @@ public class Project {
     static{
         alma = new Alm(conciertos, personas);
         Admin =  new Persona("Admin", "admin@admin.com", "1234", 10254621, 32145655, "20/05/1990", "M", "Famisanar", true);
+        
+        File conci= new File("Memoria/conciertos.txt");
+        File perso = new File("Memoria/personas.txt");
+        try {
+            PrintStream out= new PrintStream(conci);
+            PrintStream put= new PrintStream(perso);
+        } catch (FileNotFoundException ex) {
+        }
+        if(conci.exists()&&perso.exists()){
+            ObjectInputStream recibir;
+            ObjectInputStream recibir2;
+            try {
+                recibir = new ObjectInputStream(new FileInputStream(new File("Memoria/conciertos.txt")));
+                alma.setConciertos((Chain<Concierto>) recibir.readObject());
+                recibir.close();
+                recibir2 = new ObjectInputStream(new FileInputStream(new File("Memoria/personas.txt")));
+                alma.setPersonas((Chain<Persona>) recibir.readObject());
+                recibir2.close();
+            } catch (FileNotFoundException ex) {
+                
+            } catch (IOException ex) {
+                
+            } catch (ClassNotFoundException ex) {
+                
+            }
+            
+        }
+        
         alma.getPersonas().add(0, Admin);
     }
     
@@ -143,9 +179,7 @@ public class Project {
         }
     };
     
-    public static void eliminar_artista(){
-        
-    };
+    
 
     /* NO TEMINADO!!! */
     public static void menu_comprar(){
