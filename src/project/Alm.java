@@ -39,12 +39,8 @@ public class Alm {
     public boolean[] verificarPersona(String correo, String contrasena){
         boolean[] confirmacion = new boolean[2];
         for(int i=0; i<personas.size;i++){
-            System.out.println("si entre");
-            System.out.println(personas.get(i).getCorreo());
-            System.out.println(personas.get(i).getContrasena());
             if((personas.get(i).getCorreo().equals(correo)) && (personas.get(i).getContrasena().equals(contrasena))){
                 confirmacion[0]=true; 
-                System.out.println("Confirme");
             }
             confirmacion[1]=personas.get(i).getRol();
         }

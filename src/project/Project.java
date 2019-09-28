@@ -177,9 +177,9 @@ public class Project {
         System.out.println("Ingrese su Contrasena: ");
         String contrasena = scan.next();
         System.out.println("Ingrese su Cedula: ");
-        int cedula = scan.nextInt();
+        long cedula = scan.nextLong();
         System.out.println("Ingrese su Celular: ");
-        int celular = scan.nextInt();
+        long celular = scan.nextLong();
         System.out.println("Ingrese su fecha de nacimiento: ");
         System.out.println("Ingrese el dia: ");
         String dia = scan.next();

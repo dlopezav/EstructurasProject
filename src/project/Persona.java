@@ -16,15 +16,15 @@ public class Persona {
     private String NombreCompleto;
     private String correo;
     private String contrasena; 
-    private int cedula;   
-    private int celular;
+    private long cedula;   
+    private long celular;
     private ArrayList<Boleta> boleta;        
     private String fechaNacimiento;
     private String genero;
     private String EPS;
     private Boolean rol;
 
-    public Persona(String NombreCompleto, String correo, String contrasena, int cedula, int celular, String fechaNacimiento, String genero, String EPS, Boolean rol) {
+    public Persona(String NombreCompleto, String correo, String contrasena, long cedula, long celular, String fechaNacimiento, String genero, String EPS, Boolean rol) {
         this.NombreCompleto = NombreCompleto;
         this.correo = correo;
         this.contrasena = contrasena;
@@ -65,18 +65,23 @@ public class Persona {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-    public int getCedula() {
+
+    public long getCedula() {
         return cedula;
     }
-    public void setCedula(int cedula) {
+
+    public void setCedula(long cedula) {
         this.cedula = cedula;
     }
-    public int getCelular() {
+
+    public long getCelular() {
         return celular;
     }
-    public void setCelular(int celular) {
+
+    public void setCelular(long celular) {
         this.celular = celular;
     }
+    
     public ArrayList<Boleta> getBoleta() {
         return boleta;
     }
