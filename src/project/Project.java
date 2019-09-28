@@ -103,6 +103,17 @@ public class Project {
     };
     
     public static void crear_artista(){
+        Scanner scan = new Scanner(System.in);
+        String genero;
+        String nombre;
+        int cantidad;
+        System.out.println("Ingrese el genero del Artista:");
+        genero = scan.next();
+        System.out.println("Ingrese el nombre del Artista:");
+        nombre = scan.next();
+        System.out.println("Ingrese el numero de integrantes del Artista:");
+        cantidad = scan.nextInt();
+        Artista art = new Artista(genero, nombre,cantidad);
         
     };
     
@@ -114,7 +125,13 @@ public class Project {
         System.out.println("Escriba el nombre del concierto: ");
         
         String opcCon = scan.nextLine();
-        
+        System.out.println("Escriba el porcentaje de cambio en los precios del concierto: ");
+        int prc = scan.nextInt();
+        for(int i = 0; i<alma.getConciertos().size(); i++){
+            if(alma.getConciertos().get(i).getNombre().equals(opcCon)){
+                alma.getConciertos().get(i).cambiarPrecio(prc);
+            }
+        }
         
     };
     
