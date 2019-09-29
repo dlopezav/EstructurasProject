@@ -49,7 +49,7 @@ public class Alm implements Serializable{
     }
     
     public void mostrarZonas(String nombre){
-        for(int i=0;i<conciertos.size;i++){
+        for(int i=0;i<conciertos.size();i++){
             if(conciertos.get(i).getNombre().equals(nombre)){
                 for(int j=0; j<conciertos.get(i).getZonas().size();j++){
                     System.out.println("Zona "+conciertos.get(i).getZonas().get(j).getNumero() +", cupos: "+conciertos.get(i).getZonas().get(j).getCupos()+", precio: "+conciertos.get(i).getZonas().get(j).getPrecio() );
@@ -74,9 +74,4 @@ public class Alm implements Serializable{
         
     }
     
-    public void mostrar_Conciertos(){
-        for(int i = 0; i<conciertos.size(); i++){
-            System.out.println(i+". "+conciertos.get(i).getNombre());
-        }
-    }
 }
