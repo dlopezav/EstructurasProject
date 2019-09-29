@@ -226,6 +226,8 @@ public class Project implements Serializable{
                 menu_persona(persona);
             }else{
                 menu_zona(bandera, persona);
+                
+                menu_persona(persona);
             }
         }
     }
@@ -257,11 +259,13 @@ public class Project implements Serializable{
                                 corte2=false; 
                                 alma.getConciertos().get(bandera).getZonas().get(opcZon-100).setCupos(alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getCupos()-numeroDeBoletas);
                                 for (int i = 0; i < alma.getPersonas().size(); i++) {
-                                    if(alma.getPersonas().get(i) == usuario){
+                                    if(alma.getPersonas().get(i).getCorreo().equals(usuario.getCorreo())){
                                         for (int j = 0; j < numeroDeBoletas; j++) {
                                             bolCom.add(alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getBoletas().get(i));
                                         }
                                         alma.getPersonas().get(i).setBoleta(bolCom);
+                                        System.out.println(alma.getPersonas().get(i).getBoleta().get(0).getNombreConcierto() + "\n" +
+                                                alma.getPersonas().get(i).getBoleta().get(0).getZona());
                                         if(alma.getPersonas().get(i).getBoleta().size()==numeroDeBoletas){
                                             System.out.println("\nCompra realizada satisfactoriamente!\n");
                                         }
