@@ -53,12 +53,11 @@ public class Project implements Serializable{
                             menu_persona(personas.get(i));
                     }
                 }
-                
             }
         }else{
             
-            System.out.println("\n ¡¡el ususario o la contrasena no coinciden!! \n");
-            menu_ingreso();
+            System.out.println("\n ¡¡el ususario o la contrasena no coinciden o no existen!! \n");
+            menu_inicial();
         }
     };
     
@@ -202,7 +201,7 @@ public class Project implements Serializable{
     };
     
     /* NO TEMINADO!!! */
-    public static void menu_comprar(){
+    public static void menu_comprar(Persona persona){
         Scanner scan = new Scanner(System.in);
         System.out.println("------BIENVENIDO AL MENU DE COMPRAR-------");
         
@@ -212,7 +211,10 @@ public class Project implements Serializable{
         String opcCon = scan.nextLine();
         int bandera=0;
         boolean corte = true;
-        
+    if(alma.getConciertos().size()==0){
+        System.out.println("\n No hay conciertos disponibles!! \n");
+        menu_persona(persona);
+    }else{
         for(int i = 0; i<alma.getConciertos().size() && corte; i++){
             if(alma.getConciertos().get(i).getNombre().equals(opcCon)){
                 bandera = i;
@@ -221,10 +223,11 @@ public class Project implements Serializable{
         }
         if(corte){
             System.out.println("El concierto seleccionado no existe!");
-            menu_comprar();
+            menu_persona(persona);
         }else{
             alma.mostrarZonas(alma.getConciertos().get(bandera).getNombre());
         }
+    }
         int opcZon = 0;
         int numeroDeBoletas;
         boolean corte2=true;
@@ -262,7 +265,6 @@ public class Project implements Serializable{
         String NombreCompleto = scan.next();
         System.out.println("Ingrese su Correo: ");
         String correo = scan.next();
-        correo = scan.next();
         System.out.println("Ingrese su Contrasena: ");
         String contrasena = scan.next();
         System.out.println("Ingrese su Cedula: ");
@@ -288,6 +290,7 @@ public class Project implements Serializable{
         
         menu_inicial();
     };
+    
     public static void menu_persona(Persona persona){
         Scanner scan = new Scanner(System.in);
 
@@ -300,7 +303,7 @@ public class Project implements Serializable{
         int opc =menu.nextInt();
         switch (opc){
             case 1:
-                menu_comprar();
+                menu_comprar(persona);
             break;
             case 2: 
                 for(Boleta e: persona.getBoleta()){
@@ -332,6 +335,7 @@ public class Project implements Serializable{
         }
         
     };
+    
     public static void menu_inicial(){
         System.out.println("------BIENVENIDO AL MENU INICIAL-------");
         System.out.println("1. Ingresar");
