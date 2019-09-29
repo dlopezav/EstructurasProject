@@ -227,7 +227,6 @@ public class Project implements Serializable{
             }else{
                 menu_zona(bandera, persona);
                 
-                menu_persona(persona);
             }
         }
     }
@@ -286,7 +285,7 @@ public class Project implements Serializable{
                 System.out.println("Opción invalida! \n");
             }
         }while(opcZon != alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getNumero());
-        menu_inicial();
+        menu_persona();
         return null;
     }
     
