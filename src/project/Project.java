@@ -103,6 +103,17 @@ public class Project {
     };
     
     public static void crear_artista(){
+        Scanner scan = new Scanner(System.in);
+        String genero;
+        String nombre;
+        int cantidad;
+        System.out.println("Ingrese el genero del Artista:");
+        genero = scan.next();
+        System.out.println("Ingrese el nombre del Artista:");
+        nombre = scan.next();
+        System.out.println("Ingrese el numero de integrantes del Artista:");
+        cantidad = scan.nextInt();
+        Artista art = new Artista(genero, nombre,cantidad);
         
     };
     
