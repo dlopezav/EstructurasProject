@@ -46,7 +46,7 @@ public class Project implements Serializable{
         dates = alma.verificarPersona(usuario, contra);
         if(dates[0]){
             if(dates[1]){
-                menu_admin();
+                menu_admin(usuario, contra);
             }else{
                 for(int i=0; i<alma.getPersonas().size;i++){
                     if((alma.getPersonas().get(i).getCorreo().equals(usuario)) && (alma.getPersonas().get(i).getContrasena().equals(contra))){
@@ -61,7 +61,7 @@ public class Project implements Serializable{
         }
     };
     
-    public static void menu_admin(){
+    public static void menu_admin(String usuario, String contra){
         Scanner scan = new Scanner(System.in);
         boolean ban = true;
         do{
@@ -75,7 +75,7 @@ public class Project implements Serializable{
             int opc = scan.nextInt();
             switch(opc){
                 case 1:
-                    crear_concierto();
+                    crear_concierto(usuario, contra);
                     break;
                     
                 case 2:
@@ -102,7 +102,7 @@ public class Project implements Serializable{
         }while(ban);
     }
     
-    public static void crear_concierto(){
+    public static void crear_concierto(String usuario, String contra){
         Scanner scan = new Scanner(System.in);
         Concierto con;
         ArrayList<Artista> artistas = new ArrayList();
@@ -128,7 +128,7 @@ public class Project implements Serializable{
         Boleta bol;
         for (int i = 0; i < numZon; i++) {
             boletas = new ArrayList();
-            System.out.println("Ingrese el numero de cupos por esta zona( " + cod[i] +" )");
+            System.out.println("\n \n Ingrese el numero de cupos por esta zona( " + cod[i] +" )");
             cupos = scan.nextInt();
             System.out.println("Ingrese el precio para la zona: ( " + cod[i] +" )");
             precio = scan.nextInt();
@@ -148,14 +148,14 @@ public class Project implements Serializable{
             zonas.add(auxZona);
         }
         
-        System.out.println("Ingrese cuantas artistas va a tener el concierto: ");
+        System.out.println("\n Ingrese cuantas artistas va a tener el concierto: ");
         int numArt = scan.nextInt();
         for (int i = 0; i < numArt; i++) {
             artistas.add(crear_artista());
         }
         con = new Concierto(fecha, nombre, artistas, null, zonas, hora);
         alma.getConciertos().add(0, con);
-        menu_admin();
+        menu_admin(usuario, contra);
     };
     
     public static Artista crear_artista(){
@@ -211,51 +211,80 @@ public class Project implements Serializable{
         String opcCon = scan.nextLine();
         int bandera=0;
         boolean corte = true;
-    if(alma.getConciertos().size()==0){
-        System.out.println("\n No hay conciertos disponibles!! \n");
-        menu_persona(persona);
-    }else{
-        for(int i = 0; i<alma.getConciertos().size() && corte; i++){
-            if(alma.getConciertos().get(i).getNombre().equals(opcCon)){
-                bandera = i;
-                corte = false;
-            }
-        }
-        if(corte){
-            System.out.println("El concierto seleccionado no existe!");
+        if(alma.getConciertos().size()==0){
+            System.out.println("\n No hay conciertos disponibles!! \n");
             menu_persona(persona);
         }else{
-            alma.mostrarZonas(alma.getConciertos().get(bandera).getNombre());
+            for(int i = 0; i<alma.getConciertos().size() && corte; i++){
+                if(alma.getConciertos().get(i).getNombre().equals(opcCon)){
+                    bandera = i;
+                    corte = false;
+                }
+            }
+            if(corte){
+                System.out.println("El concierto seleccionado no existe!");
+                menu_persona(persona);
+            }else{
+                menu_zona(bandera, persona);
+            }
         }
     }
+    
+    public static Zona menu_zona(int bandera, Persona usuario){
+        Scanner scan = new Scanner(System.in);
+        
+        alma.mostrarZonas(alma.getConciertos().get(bandera).getNombre());
         int opcZon = 0;
         int numeroDeBoletas;
         boolean corte2=true;
+        ArrayList<Boleta> bolCom= new ArrayList();
         do{
             System.out.println("Seleccione la zona: ");
             opcZon = scan.nextInt();
             if(alma.getConciertos().get(bandera).size()>=opcZon/100){
-            if(opcZon== alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getNumero()){
-                do{
-                    System.out.println("Ingrese el numero de Boletas que desea comprar:");
-                    numeroDeBoletas = scan.nextInt();
-                    if(numeroDeBoletas<=alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getCupos()){
-                       corte2=false; 
-                       alma.getConciertos().get(bandera).getZonas().get(opcZon-100).setCupos(alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getCupos()-numeroDeBoletas);
-                    }else{
-                        System.out.println("No hay suficientes boletas, seleccione un numero menor de boletas");
-                    }
-                }while(corte2);
-            }else{
-                System.out.println("Opción invalida! \n");
-            }
+                if(opcZon== alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getNumero()){
+                    do{
+                        System.out.println("Ingrese el numero de Boletas que desea comprar:");
+                        numeroDeBoletas = scan.nextInt();
+                        
+                        System.out.println("\n El costo es:"+ alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getPrecio()*numeroDeBoletas);
+                        
+                        System.out.println("\nDesea confirmar la compra? (si/no)");
+                        String confir = scan.next();
+                        
+                        if(confir.equals("si")){
+                            if(numeroDeBoletas<=alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getCupos()){
+                                corte2=false; 
+                                alma.getConciertos().get(bandera).getZonas().get(opcZon-100).setCupos(alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getCupos()-numeroDeBoletas);
+                                for (int i = 0; i < alma.getPersonas().size(); i++) {
+                                    if(alma.getPersonas().get(i) == usuario){
+                                        for (int j = 0; j < numeroDeBoletas; j++) {
+                                            bolCom.add(alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getBoletas().get(i));
+                                        }
+                                        alma.getPersonas().get(i).setBoleta(bolCom);
+                                        if(alma.getPersonas().get(i).getBoleta().size()==numeroDeBoletas){
+                                            System.out.println("\nCompra realizada satisfactoriamente!\n");
+                                        }
+                                    }
+                                }
+                            }else{
+                                System.out.println("\n \n No hay suficientes boletas, seleccione un numero menor de boletas \n \n");
+                            }
+                        }else{
+                            System.out.println("\n");
+                        }
+                        
+                    }while(corte2);
+                }else{
+                    System.out.println("Opción invalida! \n");
+                }
             }else{
                 System.out.println("Opción invalida! \n");
             }
         }while(opcZon != alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getNumero());
         menu_inicial();
+        return null;
     }
-    
     
     public static void menu_registro(){
         Scanner scan = new Scanner(System.in);
@@ -287,6 +316,8 @@ public class Project implements Serializable{
         Persona per = new Persona(NombreCompleto, correo, contrasena, cedula, celular, fechaNacimiento, genero, EPS, false);
         
         alma.getPersonas().add(0,per);
+        
+        System.out.println("\n Usuario creado satisfactoriamente! \n");
         
         menu_inicial();
     };
