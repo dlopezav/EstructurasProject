@@ -1,5 +1,7 @@
 
 
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -50,12 +52,17 @@ public class Project implements Serializable{
             if(dates[1]){
                 menu_admin();
             }else{
-                menu_comprar();
+                for(int i=0; i<personas.size;i++){
+                    if((personas.get(i).getCorreo().equals(usuario)) && (personas.get(i).getContrasena().equals(contra))){
+                            menu_persona(personas.get(i));
+                    }
+                }
+                
             }
         }else{
             
             System.out.println("\n ¡¡el ususario o la contrasena no coinciden!! \n");
-            menu_inicial();
+            menu_ingreso();
         }
     };
     
@@ -129,7 +136,7 @@ public class Project implements Serializable{
             System.out.println("Ingrese el precio para la zona: ( " + cod[i] +" )");
             precio = scan.nextInt();
             System.out.println("Esta zona ( " + cod[i] +" ) sera VIP? (si/no)");
-            scan.next();
+            
             String res = scan.next();
             if(res.equals("si")){
                 VIP=true;
@@ -201,10 +208,7 @@ public class Project implements Serializable{
         Scanner scan = new Scanner(System.in);
         System.out.println("------BIENVENIDO AL MENU DE COMPRAR-------");
         
-        for(int i = 0; i<conciertos.size(); i++){
-            System.out.println(i+". "+alma.getConciertos().get(i).getNombre());
-        }
-        
+        alma.mostrar_Conciertos();
         System.out.println("Escriba el nombre del concierto: ");
         
         String opcCon = scan.nextLine();
@@ -229,13 +233,14 @@ public class Project implements Serializable{
         do{
             System.out.println("Seleccione la zona: ");
             opcZon = scan.nextInt();
-        
-            if(opcZon== alma.getConciertos().get(bandera).getZonas().get(opcZon).getNumero()){
+            if(alma.getConciertos().get(bandera).size()>=opcZon/100){
+            if(opcZon== alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getNumero()){
                 do{
                     System.out.println("Ingrese el numero de Boletas que desea comprar:");
                     numeroDeBoletas = scan.nextInt();
-                    if(numeroDeBoletas<=alma.getConciertos().get(bandera).getZonas().get(opcZon).getCupos()){
+                    if(numeroDeBoletas<=alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getCupos()){
                        corte2=false; 
+                       alma.getConciertos().get(bandera).getZonas().get(opcZon-100).setCupos(alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getCupos()-numeroDeBoletas);
                     }else{
                         System.out.println("No hay suficientes boletas, seleccione un numero menor de boletas");
                     }
@@ -243,7 +248,11 @@ public class Project implements Serializable{
             }else{
                 System.out.println("Opción invalida! \n");
             }
-        }while(opcZon != alma.getConciertos().get(bandera).getZonas().get(opcZon).getNumero());
+            }else{
+                System.out.println("Opción invalida! \n");
+            }
+        }while(opcZon != alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getNumero());
+        menu_inicial();
     }
     
     
@@ -255,6 +264,7 @@ public class Project implements Serializable{
         String NombreCompleto = scan.next();
         System.out.println("Ingrese su Correo: ");
         String correo = scan.next();
+        correo = scan.next();
         System.out.println("Ingrese su Contrasena: ");
         String contrasena = scan.next();
         System.out.println("Ingrese su Cedula: ");
@@ -280,7 +290,50 @@ public class Project implements Serializable{
         
         menu_inicial();
     };
-    
+    public static void menu_persona(Persona persona){
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("------BIENVENIDO A SU PERFIL-------");
+        System.out.println("1. Comprar");
+        System.out.println("2. Ver información de boletas compradas");
+        System.out.println("3. Ver información personal");
+        System.out.println("4. Salir");
+        Scanner menu = new Scanner(System.in);
+        int opc =menu.nextInt();
+        switch (opc){
+            case 1:
+                menu_comprar();
+            break;
+            case 2: 
+                for(Boleta e: persona.getBoleta()){
+                    System.out.println("Boleta para la zona: "+e.getZona());
+                    e.getNombreConcierto();
+                }
+                menu_persona(persona);
+            break;
+            case 3:
+                System.out.println("Usuario:");
+                System.out.println(persona.getCorreo());
+                System.out.println("EPS:");
+                System.out.println(persona.getEPS());
+                System.out.println("Genero:");
+                System.out.println(persona.getGenero());
+                System.out.println("Cedula:");
+                System.out.println(persona.getCedula());
+                System.out.println("Fecha de nacimiento:");
+                System.out.println(persona.getFechaNacimiento());
+                menu_persona(persona);
+            break; 
+            case 4:
+                menu_inicial();
+            break; 
+            default:
+                System.out.println("\n Opción invalida!!\n");
+                menu_persona(persona);
+                break;
+        }
+        
+    };
     public static void menu_inicial(){
         System.out.println("------BIENVENIDO AL MENU INICIAL-------");
         System.out.println("1. Ingresar");
@@ -301,6 +354,7 @@ public class Project implements Serializable{
             break;
             case 3:
                 System.out.println("\n \n");
+                
                 System.out.println("GRACIAS POR SU VISITA!");
             break; 
             
