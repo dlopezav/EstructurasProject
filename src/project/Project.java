@@ -285,7 +285,7 @@ public class Project implements Serializable{
                 System.out.println("Opción invalida! \n");
             }
         }while(opcZon != alma.getConciertos().get(bandera).getZonas().get(opcZon-100).getNumero());
-        menu_persona();
+        menu_persona(usuario);
         return null;
     }
     
