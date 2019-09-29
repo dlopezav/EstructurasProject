@@ -206,21 +206,19 @@ public class Project implements Serializable{
         System.out.println("------BIENVENIDO AL MENU DE COMPRAR-------");
         
         alma.mostrar_Conciertos();
+        if(!alma.getConciertos().isEmpty()){
         System.out.println("Escriba el nombre del concierto: ");
         
         String opcCon = scan.nextLine();
         int bandera=0;
         boolean corte = true;
-        if(alma.getConciertos().size()==0){
-            System.out.println("\n No hay conciertos disponibles!! \n");
-            menu_persona(persona);
-        }else{
+        
             for(int i = 0; i<alma.getConciertos().size() && corte; i++){
                 if(alma.getConciertos().get(i).getNombre().equals(opcCon)){
                     bandera = i;
                     corte = false;
                 }
-            }
+            
             if(corte){
                 System.out.println("El concierto seleccionado no existe!");
                 menu_persona(persona);
@@ -228,6 +226,10 @@ public class Project implements Serializable{
                 menu_zona(bandera, persona);
                 
             }
+        }
+        }else{
+            System.out.println("\n No hay conciertos disponibles!! \n");
+            menu_persona(persona);
         }
     }
     
