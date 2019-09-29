@@ -80,7 +80,4 @@ public class Concierto implements Serializable{
         }
         }
     }
-    public int size(){
-        return zonas.size();
-    }
 }
