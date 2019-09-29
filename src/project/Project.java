@@ -50,7 +50,7 @@ public class Project implements Serializable{
             }else{
                 for(int i=0; i<alma.getPersonas().size;i++){
                     if((alma.getPersonas().get(i).getCorreo().equals(usuario)) && (alma.getPersonas().get(i).getContrasena().equals(contra))){
-                            menu_persona(personas.get(i));
+                            menu_persona(alma.getPersonas().get(i));
                     }
                 }
             }
