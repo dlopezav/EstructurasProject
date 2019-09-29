@@ -118,6 +118,20 @@ public class Project {
     };
     
     public static void modificar_precios(){
+        Scanner scan = new Scanner(System.in);
+        System.out.println("------BIENVENIDO AL MENU DE MODIFICAR PRECIOS-------");
+        
+        alma.mostrar_Conciertos();
+        System.out.println("Escriba el nombre del concierto: ");
+        
+        String opcCon = scan.nextLine();
+        System.out.println("Escriba el porcentaje de cambio en los precios del concierto: ");
+        int prc = scan.nextInt();
+        for(int i = 0; i<alma.getConciertos().size(); i++){
+            if(alma.getConciertos().get(i).getNombre().equals(opcCon)){
+                alma.getConciertos().get(i).cambiarPrecio(prc);
+            }
+        }
         
     };
     
