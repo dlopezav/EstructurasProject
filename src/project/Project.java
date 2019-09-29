@@ -39,20 +39,27 @@ public class Project implements Serializable{
         Scanner scan = new Scanner(System.in);
         System.out.println("------BIENVENIDO AL MENU DE INGRESO-------");
         System.out.println("Ingrese su correo: ");
-        String usuario=scan.nextLine();
+        String usuario=scan.next();
         System.out.println("Ingrese su contrasena: ");
-        String contra=scan.nextLine();
+        String contra=scan.next();
         boolean[] dates = new boolean[2];
         dates = alma.verificarPersona(usuario, contra);
-        
+        if(dates[0]){
+            if(dates[1]){
+                menu_admin();
+            }else{
                 for(int i=0; i<alma.getPersonas().size;i++){
                     if((alma.getPersonas().get(i).getCorreo().equals(usuario)) && (alma.getPersonas().get(i).getContrasena().equals(contra))){
                             menu_persona(personas.get(i));
                     }
                 }
                 
+            }
+        }else{
             
-        
+            System.out.println("\n ¡¡el ususario o la contrasena no coinciden!! \n");
+            menu_ingreso();
+        }
     };
     
     public static void menu_admin(){
@@ -77,8 +84,10 @@ public class Project implements Serializable{
                     break;
                     
                 case 3:
+                    alma.mostrar_Conciertos();
                     System.out.println("Ingrese el concierto a eliminar: ");
                     String conElm = scan.nextLine();
+                    conElm = scan.nextLine();
                     eliminar_concierto(conElm);
                     break;
 
@@ -280,6 +289,7 @@ public class Project implements Serializable{
         menu_inicial();
     };
     public static void menu_persona(Persona persona){
+        Scanner scan = new Scanner(System.in);
 
         System.out.println("------BIENVENIDO A SU PERFIL-------");
         System.out.println("1. Comprar");
