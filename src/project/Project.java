@@ -1,7 +1,3 @@
-
-
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -286,7 +282,7 @@ public class Project implements Serializable{
         
         Persona per = new Persona(NombreCompleto, correo, contrasena, cedula, celular, fechaNacimiento, genero, EPS, false);
         
-        alma.getPersonas().add(alma.getPersonas().size()-1,per);
+        alma.getPersonas().add(0,per);
         
         menu_inicial();
     };
@@ -390,7 +386,7 @@ public class Project implements Serializable{
             alma.setPersonas((Chain<Persona>) recibir2.readObject());
             recibir2.close();
             recibir.close();
-            System.out.println(alma.getConciertos().firstNode.element.getNombre());
+            
         }
         
         menu_inicial();
