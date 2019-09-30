@@ -441,8 +441,8 @@ public class Project implements Serializable{
         return h;  
     }
     
-    public static void crear_concierto_ran(String usuario, String contra){
-        Scanner scan = new Scanner(System.in);
+    public static void crear_concierto_ran(){
+        
         Concierto con;
         ArrayList<Artista> artistas = new ArrayList();
         ArrayList<Zona> zonas = new ArrayList();
@@ -495,15 +495,15 @@ public class Project implements Serializable{
     };
     
     public static Artista crear_artista_ran(){
-        Scanner scan = new Scanner(System.in);
+        
         String genero;
         String nombre;
         int cantidad;
-        System.out.println("Ingrese el genero del Artista:");
+        //System.out.println("Ingrese el genero del Artista:");
         genero = Character.toString(generar_char());
-        System.out.println("Ingrese el nombre del Artista:");
+        //System.out.println("Ingrese el nombre del Artista:");
         nombre = Character.toString(generar_char());;
-        System.out.println("Ingrese el numero de integrantes del Artista:");
+        //System.out.println("Ingrese el numero de integrantes del Artista:");
         cantidad = generar_entero();
         Artista art = new Artista(genero, nombre,cantidad);
         
@@ -539,9 +539,9 @@ public class Project implements Serializable{
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         
-        File conci= new File("Memoria/conciertos.txt");
-        File perso = new File("Memoria/personas.txt");
-        
+        //File conci= new File("Memoria/conciertos.txt");
+        //File perso = new File("Memoria/personas.txt");
+        /*
         if(conci.exists()&&perso.exists()){
             ObjectInputStream recibir = new ObjectInputStream(new FileInputStream(new File("Memoria/conciertos.txt")));
             ObjectInputStream recibir2 = new ObjectInputStream(new FileInputStream(new File("Memoria/personas.txt")));
@@ -551,9 +551,19 @@ public class Project implements Serializable{
             recibir.close();
             
         }
+        */
+        long inicio = System.currentTimeMillis();
+        for(int i=0;i<30000;i++){
+            crear_concierto_ran();
+        }
+        long fin = System.currentTimeMillis();
+         
+        double tiempo = (double) ((fin - inicio)/1000);
+         
+        System.out.println(tiempo +" segundos");
         
-        menu_inicial();
-        Guardar(alma.getPersonas(),alma.getConciertos());
+        //menu_inicial();
+        //Guardar(alma.getPersonas(),alma.getConciertos());
       
     }
     private static void Guardar(Chain<Persona> per,Chain<Concierto> conc) throws IOException {
