@@ -200,7 +200,6 @@ public class Project implements Serializable{
         }
     };
     
-    /* NO TEMINADO!!! */
     public static void menu_comprar(Persona persona){
         Scanner scan = new Scanner(System.in);
         System.out.println("------BIENVENIDO AL MENU DE COMPRAR-------");
@@ -403,21 +402,143 @@ public class Project implements Serializable{
         }
     }
     
+    
+    
+    /*TODO LO QUE TIENE QUE VER CON GENERAR RANDOM*/
+    public static char generar_char(){
+        Random rdn = new Random();
+        int h=(int)(rdn.nextDouble()*26 + 97);
+        return (char)h;
+    }
+    
+    public static int generar_entero(){
+        Random rdn = new Random();
+        int h=(int)(rdn.nextDouble()*99 + 1);
+        return h;  
+    }
+    
+    public static int generar_precio(){
+        Random rdn = new Random();
+        int h=(int)(rdn.nextDouble()*20000 + 10000);
+        return h;  
+    }
+    
+    public static int generar_hora(){
+        Random rdn = new Random();
+        int h=(int)(rdn.nextDouble()*24 + 0);
+        return h;  
+    }
+    
+    public static int generar_annio(){
+        Random rdn = new Random();
+        int h=(int)(rdn.nextDouble()*50 + 2000);
+        return h;  
+    }
+    
+    public static int generar_annio_nacimiento(){
+        Random rdn = new Random();
+        int h=(int)(rdn.nextDouble()*30 + 1980);
+        return h;  
+    }
+    
+    public static void crear_concierto_ran(String usuario, String contra){
+        Scanner scan = new Scanner(System.in);
+        Concierto con;
+        ArrayList<Artista> artistas = new ArrayList();
+        ArrayList<Zona> zonas = new ArrayList();
+        
+        /*Ingrese el nombre del concierto:*/
+        String nombre = Character.toString(generar_char());
+        
+        /*Ingrese la fecha del concierto formato DD/MM/AAAA: */
+        String fecha = (generar_entero() + "/" + generar_entero() + "/" + generar_annio_nacimiento());
+        
+        /*Ingrese la hora del concierto:*/
+        String hora = (generar_hora()+":00");
+        
+        /*Ingrese cuantas zonas va a tener el concierto:*/
+        int numZon = generar_entero();
+        
+        int[] cod = new int[numZon];
+        for (int i = 0; i < numZon; i++) {
+            cod[i]=100+i;
+        }
+        Zona auxZona;
+        int cupos;
+        int numero;
+        int precio;
+        boolean VIP;
+        ArrayList<Boleta> boletas;
+        Boleta bol;
+        for (int i = 0; i < numZon; i++) {
+            boletas = new ArrayList();
+            /*Ingrese el numero de cupos por esta zona*/
+            cupos = generar_entero();
+            /*Ingrese el precio para la zona*/
+            precio = generar_precio();
+
+            for (int j = 0; j < cupos; j++) {
+                bol = new Boleta(cod[i], nombre);
+                boletas.add(bol);
+            }
+            auxZona = new Zona(cupos, cod[i], precio, nombre, false);
+            zonas.add(auxZona);
+        }
+        
+        /*Ingrese cuantas artistas va a tener el concierto:*/
+        int numArt = generar_entero();
+        for (int i = 0; i < numArt; i++) {
+            artistas.add(crear_artista_ran());
+        }
+        con = new Concierto(fecha, nombre, artistas, null, zonas, hora);
+        alma.getConciertos().add(0, con);
+    };
+    
+    public static Artista crear_artista_ran(){
+        Scanner scan = new Scanner(System.in);
+        String genero;
+        String nombre;
+        int cantidad;
+        System.out.println("Ingrese el genero del Artista:");
+        genero = Character.toString(generar_char());
+        System.out.println("Ingrese el nombre del Artista:");
+        nombre = Character.toString(generar_char());;
+        System.out.println("Ingrese el numero de integrantes del Artista:");
+        cantidad = generar_entero();
+        Artista art = new Artista(genero, nombre,cantidad);
+        
+        return art;
+    };
+    
+    public static void menu_registro_ran(){
+        /*CREAR PERSONA*/
+        /*Ingrese su Nombre Completo: ");*/
+        String NombreCompleto = Character.toString(generar_char());
+        /*Ingrese su Correo: ");*/
+        String correo = Character.toString(generar_char());
+        /*Ingrese su Contrasena: ");*/
+        String contrasena = Character.toString(generar_char());
+        /*Ingrese su Cedula: ");*/
+        long cedula = generar_entero();
+        /*Ingrese su Celular: ");*/
+        long celular = generar_entero();
+        /*Ingrese su fecha de nacimiento: ");*/
+        String fechaNacimiento = (generar_entero() + "/" + generar_entero() + "/" + generar_annio_nacimiento());
+        /*Ingrese su genero (F/M/O): ");*/
+        String genero = Character.toString(generar_char());
+        /*Ingrese el nombre de su EPS o sisben: ");*/
+        String EPS = Character.toString(generar_char());
+        
+        Persona per = new Persona(NombreCompleto, correo, contrasena, cedula, celular, fechaNacimiento, genero, EPS, false);
+        
+        alma.getPersonas().add(0,per);
+    };
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         
-        /*Random rdn = new Random();
-        int[] h= new int[6];
-        for(int i = 0; i<6; i++){
-            h[i]=(int)(rdn.nextDouble()*26 + 97);
-        }
-        for(int i = 0; i<6; i++){
-            System.out.println((char)h[i]);
-        }
-        System.out.println("fin");
-        */
         File conci= new File("Memoria/conciertos.txt");
         File perso = new File("Memoria/personas.txt");
         
