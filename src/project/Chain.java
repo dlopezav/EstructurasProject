@@ -12,7 +12,7 @@ import java.util.function.Consumer;
  *
  * @author Estudiante
  */
-public class Chain<T> implements LinearList<T>, Iterable<T>, Serializable {
+public class Chain<T> implements LinearList<T>, Iterable<T> {
     
     protected Node<T> firstNode;
     protected int size;

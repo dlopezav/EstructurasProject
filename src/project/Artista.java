@@ -11,7 +11,7 @@ import java.io.Serializable;
  *
  * @author Hamed, Diego, David
  */
-public class Artista implements Serializable{
+public class Artista {
     private String generoMusical;
     private String nombre;
     private int integrantes;

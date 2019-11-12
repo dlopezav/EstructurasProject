@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Hp
  */
-public class BoletaVIP extends Boleta implements Serializable{
+public class BoletaVIP extends Boleta {
     
     private int numSilla;
     private Boolean estadoReserva;

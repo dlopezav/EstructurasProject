@@ -20,39 +20,42 @@ import java.util.logging.Logger;
  *
  * @author Hamed, Diego, David
  */
-public class Project implements Serializable{
+public class Project {
     static Alm alma;
     static Persona Admin;
     static Chain<Concierto> conciertos = new Chain<>();
     static Chain<Persona> personas = new Chain<>();
+    static AVLtree personas2 = new AVLtree();
     
     static{
-        alma = new Alm(conciertos, personas);
+        alma = new Alm(conciertos, personas, personas2);
         Admin =  new Persona("Admin", "admin@admin.com", "1234", 10254621, 32145655, "20/05/1990", "M", "Famisanar", true);
         
         
-        
-        alma.getPersonas().add(0, Admin);
+        alma.getPersonas2().insert(Admin);
     }
     
     public static void menu_ingreso(){
         Scanner scan = new Scanner(System.in);
         System.out.println("------BIENVENIDO AL MENU DE INGRESO-------");
-        System.out.println("Ingrese su correo: ");
-        String usuario=scan.next();
+        System.out.println("Ingrese su cedula: ");
+        long usuario=scan.nextLong();
         System.out.println("Ingrese su contrasena: ");
         String contra=scan.next();
         boolean[] dates = new boolean[2];
+        
         dates = alma.verificarPersona(usuario, contra);
+        
+        
+        
+         
+        
         if(dates[0]){
             if(dates[1]){
                 menu_admin(usuario, contra);
             }else{
-                for(int i=0; i<alma.getPersonas().size;i++){
-                    if((alma.getPersonas().get(i).getCorreo().equals(usuario)) && (alma.getPersonas().get(i).getContrasena().equals(contra))){
-                            menu_persona(alma.getPersonas().get(i));
-                    }
-                }
+                menu_persona(alma.getPersonas2().contains(usuario).getPer());
+                    
             }
         }else{
             
@@ -61,7 +64,7 @@ public class Project implements Serializable{
         }
     };
     
-    public static void menu_admin(String usuario, String contra){
+    public static void menu_admin(long usuario, String contra){
         Scanner scan = new Scanner(System.in);
         boolean ban = true;
         do{
@@ -102,7 +105,7 @@ public class Project implements Serializable{
         }while(ban);
     }
     
-    public static void crear_concierto(String usuario, String contra){
+    public static void crear_concierto(long usuario, String contra){
         Scanner scan = new Scanner(System.in);
         Concierto con;
         ArrayList<Artista> artistas = new ArrayList();
@@ -319,8 +322,7 @@ public class Project implements Serializable{
         
         Persona per = new Persona(NombreCompleto, correo, contrasena, cedula, celular, fechaNacimiento, genero, EPS, false);
         
-        alma.getPersonas().add(0,per);
-        
+        alma.getPersonas2().insert(per);
         System.out.println("\n Usuario creado satisfactoriamente! \n");
         
         menu_inicial();
@@ -413,7 +415,7 @@ public class Project implements Serializable{
     
     public static int generar_entero(){
         Random rdn = new Random();
-        int h=(int)(rdn.nextDouble()*99 + 1);
+        int h=(int)(rdn.nextDouble()*9999999+ 1);
         return h;  
     }
     
@@ -509,17 +511,22 @@ public class Project implements Serializable{
         
         return art;
     };
-    
+    public static long correoo;
+    public static String contra;
     public static void menu_registro_ran(){
         /*CREAR PERSONA*/
         /*Ingrese su Nombre Completo: ");*/
         String NombreCompleto = Character.toString(generar_char());
+        
         /*Ingrese su Correo: ");*/
         String correo = Character.toString(generar_char());
+        
         /*Ingrese su Contrasena: ");*/
         String contrasena = Character.toString(generar_char());
+        contra = contrasena;
         /*Ingrese su Cedula: ");*/
         long cedula = generar_entero();
+        correoo = cedula;
         /*Ingrese su Celular: ");*/
         long celular = generar_entero();
         /*Ingrese su fecha de nacimiento: ");*/
@@ -531,47 +538,28 @@ public class Project implements Serializable{
         
         Persona per = new Persona(NombreCompleto, correo, contrasena, cedula, celular, fechaNacimiento, genero, EPS, false);
         
-        alma.getPersonas().add(0,per);
+        alma.getPersonas2().insert(per);
+                
     };
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, Exception {
         
-        //File conci= new File("Memoria/conciertos.txt");
-        //File perso = new File("Memoria/personas.txt");
-        /*
-        if(conci.exists()&&perso.exists()){
-            ObjectInputStream recibir = new ObjectInputStream(new FileInputStream(new File("Memoria/conciertos.txt")));
-            ObjectInputStream recibir2 = new ObjectInputStream(new FileInputStream(new File("Memoria/personas.txt")));
-            alma.setConciertos((Chain<Concierto>) recibir.readObject());
-            alma.setPersonas((Chain<Persona>) recibir2.readObject());
-            recibir2.close();
-            recibir.close();
-            
+  
+        
+       
+        double inicio = System.currentTimeMillis();
+        for(int i=0;i<4000000;i++){
+            menu_registro_ran();
         }
-        */
-        long inicio = System.currentTimeMillis();
-        for(int i=0;i<30000;i++){
-            crear_concierto_ran();
-        }
-        long fin = System.currentTimeMillis();
-         
+        double fin = System.currentTimeMillis();
+        
         double tiempo = (double) ((fin - inicio)/1000);
-         
-        System.out.println(tiempo +" segundos");
+        System.out.println(tiempo+" segundos");
         
-        //menu_inicial();
-        //Guardar(alma.getPersonas(),alma.getConciertos());
       
     }
-    private static void Guardar(Chain<Persona> per,Chain<Concierto> conc) throws IOException {
-        ObjectOutputStream escribir= new ObjectOutputStream(new FileOutputStream(new File("Memoria/conciertos.txt")));
-            escribir.writeObject(conc);
-            escribir.close();
-        ObjectOutputStream escribir2= new ObjectOutputStream(new FileOutputStream(new File("Memoria/personas.txt")));
-            escribir2.writeObject(per);
-            escribir2.close();
-    }
+    
 }

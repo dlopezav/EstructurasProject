@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Hamed, Diego, David
  */
-public class Boleta implements Serializable{
+public class Boleta {
     private int Zona;
     private String nombreConcierto;
 

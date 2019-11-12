@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author Hamed, Diego, David
  */
-public class Concierto implements Serializable{
+public class Concierto {
     private String fecha;
     private String nombre;
     private ArrayList<Artista> artistas;

@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author Estudiante
  */
-public class Node <T> implements Serializable{
+public class Node <T> {
     T element;
     Node<T> next;
     

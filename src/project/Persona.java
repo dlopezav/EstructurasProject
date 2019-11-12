@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author Hamed, Diego, David
  */
-public class Persona implements Serializable{
+public class Persona {
     private String NombreCompleto;
     private String correo;
     private String contrasena; 

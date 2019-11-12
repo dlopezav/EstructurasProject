@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author Hamed
  */
-public class Zona implements Serializable{
+public class Zona {
     private int cupos;
     private int numero;
     private int precio;

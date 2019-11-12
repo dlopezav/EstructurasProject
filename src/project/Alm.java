@@ -12,13 +12,15 @@ import java.util.ArrayList;
  *
  * @author Hp
  */
-public class Alm implements Serializable{
+public class Alm {
     private Chain<Concierto> conciertos = new Chain<>();
     private Chain<Persona> personas = new Chain<>();
+    private AVLtree personas2 = new AVLtree();
 
-    public Alm( Chain<Concierto> conciertos, Chain<Persona> personas ) {
+    public Alm( Chain<Concierto> conciertos, Chain<Persona> personas, AVLtree personas2 ) {
         this.conciertos = conciertos;
         this.personas = personas;
+        this.personas2 = personas2;
     }
 
     public Chain<Concierto> getConciertos() {
@@ -37,13 +39,16 @@ public class Alm implements Serializable{
         this.personas = personas;
     }
 
-    public boolean[] verificarPersona(String correo, String contrasena){
+    public boolean[] verificarPersona(long cedula, String contrasena){
+        Persona persona = personas2.contains(cedula).getPer();
         boolean[] confirmacion = new boolean[2];
-        for(int i=0; i<personas.size;i++){
-            if((personas.get(i).getCorreo().equals(correo)) && (personas.get(i).getContrasena().equals(contrasena))){
-                confirmacion[0]=true;
-                confirmacion[1]=personas.get(i).getRol();
+        if(persona!= null){
+            if(persona.getContrasena().equals(contrasena)){
+                confirmacion[0] = true;
+            }else{
+                confirmacion[0] = false;
             }
+            confirmacion[1] = persona.getRol();
         }
         return confirmacion;
     }
@@ -78,5 +83,9 @@ public class Alm implements Serializable{
         for(int i=0; i<conciertos.size;i++){
             System.out.println(i+". "+conciertos.get(i).getNombre());
         }
+    }
+    
+    public AVLtree getPersonas2(){
+        return personas2;
     }
 }
